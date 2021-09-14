@@ -8,20 +8,8 @@
     height: 100vh;
     width: 100vw;
     position: relative;
+    background-image: linear-gradient(to bottom, #009688 15vh, #DADBD3 15vh);
 }
-
-/* page background */
-.wrap1 { 
-    background-color: #009688;
-    height: 170px;
-    width: 100%;
-}
-.wrap2 {
-    background-color: #DADBD3;
-    height: calc(100vh - 170px);
-    width: 100%;
-}
-/* / page background */
 
 /* boolzap application*/
 .container-app {
@@ -42,7 +30,7 @@
     font-size: 18px;
 }
 .my-container {
-    display: flex;
+    display: flex; 
     justify-content: space-between;
     align-items: center;
     padding: 0 15px;
@@ -123,12 +111,16 @@
     overflow-y: scroll;
     height: calc(100% - 155px);
 }
-.contact-user {
+.contact-users {
     display: flex;
     align-items: center;
     height: 70px;
     border-top: 1px solid #EAEAEA;
     padding: 0 15px;
+    cursor: pointer;
+}
+.contact-users:hover {
+    background-color: #EAEAEA;
 }
 /* / contacts */
 
@@ -145,6 +137,7 @@
     height: calc(100% - 120px);
     background-image: url("../img/mine.jpg");
     overflow-y: scroll;
+    padding: 0 30px;
 }
 .chat-user {
     display: flex;
@@ -166,6 +159,24 @@
 }
 .chat-input input:focus {
     outline: none;
+}
+.message-container {
+    display: flex;
+    flex-direction: column;
+    padding: 13px;
+    margin: 20px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.message-date {
+    font-size: 9px;
+    margin-top: 5px;
+}
+.sent {
+    background-color: #DCF8C6;
+}
+.received {
+    background-color: white;
 }
 /* / chat */
 /* / boolzap application*/

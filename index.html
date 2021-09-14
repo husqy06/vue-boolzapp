@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <title>Boolzap</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
                 <div class="my-container">
                     <div class="user-owner">
                         <img src="img/avatar_2.jpg" alt="" class="user-img">
-                        <span>Luigi Fiscella</span>
+                        <span>{{ userOwner.name }}</span>
                     </div>
 
                     <div class="user-option">
@@ -40,32 +41,21 @@
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Cerca o inizia una nuova chat">
                 </div>
-                <div class="contact-container">
-                    <div class="contact-user">
-                        <img src="img/avatar_3.jpg" alt="" class="user-img">
-                        <span>Federico</span>
-                    </div>
-                    <div class="contact-user">
-                        <img src="img/avatar_4.jpg" alt="" class="user-img">
-                        <span>Paolo</span>
-                    </div>
-                    <div class="contact-user">
-                        <img src="img/avatar_5.jpg" alt="" class="user-img">
-                        <span>Marco</span>
-                    </div>
-                    <div class="contact-user">
-                        <img src="img/avatar_6.jpg" alt="" class="user-img">
-                        <span>Enrico</span>
-                    </div>
-                </div>
+
+                <ul class="contact-container">
+                    <li v-for="(contact, index) in contacts" @click="setActiveChat(index)" class="contact-users">
+                        <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="" class="user-img">
+                        <span>{{ contact.name }}</span>
+                    </li>
+                </ul>
             </div>
 
             <div class="chat">
                 <div class="my-container">
                     <div class="chat-user">
-                        <img src="img/avatar_1.jpg" alt="" class="user-img">
+                        <img :src="'img/avatar' + contacts[userIndex].avatar + '.jpg'" alt="" class="user-img">
                         <div class="user-text">
-                            <span>Michele</span>
+                            <span>{{ contacts[userIndex].name }}</span>
                             <span class="small-test">Ultimo accesso alle</span>
                         </div>
                     </div>
@@ -75,13 +65,18 @@
                         <i class="fas fa-ellipsis-v"></i>
                     </div>
                 </div>
-                <div class="chat-container"></div>
+                <div class="chat-container">
+                    <div v-for="(message, index) in contacts[userIndex].messages" :class="getMessageClass(index)" class="message-container">
+                        <span>{{ message.message }}</span>
+                        <span class="message-date">{{ message.date }}</span>
+                    </div>
+                </div>
                 <div class="chat-input my-container">
                     <i class="far fa-smile"></i>
                     <input type="text" placeholder="Scrivi un messaggio">
                     <i class="fas fa-microphone"></i>
                 </div>
-            </div>
+            <!-- </div>ciao -->
 
         </div>
     </div>
