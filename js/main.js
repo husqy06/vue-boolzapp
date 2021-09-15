@@ -92,12 +92,26 @@ var app = new Vue({
                 ],
             },
         ],
+        searchContact: "",
+        contactsVisible: [],
         writeMessage: "",
         userIndex: 0,
     },
-    methods: {
+    methods: { 
         setActiveChat(index) {
             this.userIndex = index;
+        },
+        researchContact() {
+            this.contacts.forEach((contact) => {
+                if(contact.name.indexOf(this.searchContact) == -1) {
+                    contact.visible = false;
+                }
+            });
+            
+            this.searchContact = "";
+        },
+        resetContactList() {
+            this.contacts.forEach(contact => contact.visible = true);
         },
         getActiveChatClass(index) {
             if(this.userIndex === index) 
@@ -132,7 +146,5 @@ var app = new Vue({
                 )
             },1000);
         },
-        
-        
     }
 });

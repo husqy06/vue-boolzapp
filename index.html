@@ -16,7 +16,7 @@
         <div class="wrap1"></div>
         <div class="wrap2"></div>
 
-        <div id="root" class="container-app">
+        <div id="root" class="container-app" @click="resetContactList">
 
             <div class="contact">
                 <div class="my-container">
@@ -40,11 +40,11 @@
                 </div>
                 <div class="search-container">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Cerca o inizia una nuova chat">
+                    <input type="text" placeholder="Cerca o inizia una nuova chat" @keyup.enter="researchContact" v-model="searchContact">
                 </div>
 
                 <ul class="contact-container">
-                    <li v-for="(contact, index) in contacts" @click="setActiveChat(index)" class="contact-users" :class="getActiveChatClass(index)">
+                    <li v-for="(contact, index) in contacts" v-if="contact.visible == true" @click="setActiveChat(index)" class="contact-users" :class="getActiveChatClass(index)">
                         <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="" class="user-img">
                         <span>{{ contact.name }}</span>
                     </li>
