@@ -92,15 +92,47 @@ var app = new Vue({
                 ],
             },
         ],
+        writeMessage: "",
         userIndex: 0,
     },
     methods: {
         setActiveChat(index) {
             this.userIndex = index;
         },
+        getActiveChatClass(index) {
+            if(this.userIndex === index) 
+                return "focus-gray";
+        },
         getMessageClass(index) {
             let messageClass = this.contacts[this.userIndex].messages[index].status;
             return messageClass
-        }
+        },
+        sendMessage () {
+            let thiscontact = this.contacts[this.userIndex];
+            //salvo messaggio
+            thiscontact.messages.push(
+                {
+                    message: this.writeMessage,
+                    date: dayjs().format('DD/MM/YYYY hh:mm:ss'),
+                    status: 'sent'
+                }
+            );
+
+            //svuoto la memoria
+            this.writeMessage = '';
+
+            //risposta autonoma
+            setTimeout(() => {
+                thiscontact.messages.push(
+                    {
+                        message: 'Ok',
+                        date: dayjs().format('DD/MM/YYYY hh:mm:ss'),
+                        status: 'received'
+                    } 
+                )
+            },1000);
+        },
+        
+        
     }
-})
+});
